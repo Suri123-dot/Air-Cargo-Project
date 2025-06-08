@@ -5,33 +5,11 @@ Air Cargo is an aviation company that provides air transportation services for p
 As a DBA expert, need to focus on identifying the regular customers to provide offers, analyze the busiest route which helps to increase the number of aircraft required and prepare an analysis to determine the ticket sales details. This will ensure that the company improves its operability and becomes more customer-centric and a favorable choice for air travel.
 
 ## My Tasks
-1. Write a SQL query to display all the passengers (customers) who have travelled in routes 1 to 25.
 
-2. Write a SQL query to identify the number of passengers and total revenue in bussiness class from the ticket_details table. 
+As a hypothetical applicant for this role, I was tasked with:
 
-3. Write a SQL query to display the full name of the customer by extracting the first name and last name from the customer table. 
-
-4. Write a SQL query to extract the customers who have registered and booked a ticket. Use data from the customer and ticket_details tables. 
-
-5. Write a SQL query to identify the customer’s first name and last name based on their customer ID and brand (Emirates) from the ticket_details table. 
-
-6. Write a SQL query to identify the customers who have travelled by Economy Plus class using Group By and Having clause on the passengers_on_flights table. 
-
-7. Write a SQL query to identify whether the revenue has crossed 450 using the IF clause on the ticket_details table. 
-
-8. Write a SQL query to find the maximum ticket price for each class using window functions on the ticket_details table. 
-
-9. For the route ID 4, write a SQL query to view the execution plan of the passengers_on_flights table. 
-
-10. Write a SQL query to calculate the total price of all tickets booked by a customer across different aircraft IDs using rollup function.
-
-11. Write a SQL query to create a view with only business class customers along with the brand of airlines.
-
-12. Write a SQL query to create a stored procedure that extracts all the details from the routes table where the travelled distance is more than 2000 miles. 
-
-13. Write a SQL query to create a stored procedure that groups the distance travelled by each flight into three categories. The categories are, short distance travel (SDT) for >=0 AND <= 2000 miles, intermediate distance travel (IDT) for >2000 AND <=6500, and long-distance travel (LDT) for >6500. 
-
-14. Write a SQL query to extract ticket purchase date, customer ID, class ID and specify if the complimentary services are provided for the specific class using a stored function in stored procedure on the ticket_details table. Condition: If the class is Business and Economy Plus, then complimentary services are given as Yes, else it is No.
+Writing and executing SQL queries to answer these requests.
+Creating a presentation to showcase these insights, targeting top-level management.
 
 ## Sample SQL Queries
 1. Write a SQL query to display all the passengers (customers) who have travelled in routes 1 to 25.
@@ -108,6 +86,26 @@ DELIMITER ;
 
 call distance_miles_category1;
 
+## My Approach
+Data Extraction with SQL:
+
+-Used MySQL to write queries and fetch the needed data.
+
+Data Visualization:
+
+-Used Power BI to create visuals that made the insights easy to understand and engaging.
+
+Presentation Design:
+
+-Created a clear and professional presentation in Microsoft PowerPoint to share the insights.
+
+Actionable Insights:
+
+-Provided actionable insights and recommendations to assist the management team in making informed decisions.
+
+## Outcome
+This project showed my ability to work with complex data queries and share findings in a clear and engaging way. It helped me improve both my technical skills and my ability to explain insights effectively.
+
 ## Tech Stack
 SQL (Joins, Group By, Window Functions, Subqueries, CASE, Stored Procedures)
 
@@ -116,12 +114,10 @@ Power BI (Visualizations, Report Design)
 Git & GitHub (Version Control)
 
 ## Folder Structure
-- /SQL Queries
-  - Air_Cargo_Queries.sql
-- /Reports
-  - Air_cargo sql reports.pbix
-  - Air Cargo Analysis And Insights.pptx
-- README.md
+Air Cargo Requests: Document containing the 14 Air Cargo business requests.
+SQL Queries: Folder containing SQL scripts used to extract data.
+Power BI Visualizations: Folder containing Power BI files with data visualizations.
+Presentation: PowerPoint file showcasing insights and recommendations.
 
   ## Key Insights
 Identified top 5 customers contributing 70% of business-class revenue.
@@ -129,3 +125,19 @@ Identified top 5 customers contributing 70% of business-class revenue.
 Determined that Route ID 8 is the busiest, requiring increased aircraft capacity.
 
 Found that 60% of long-distance routes lack complimentary services for Economy Plus customers.
+
+## How to Use
+SQL Queries:
+
+Navigate to the SQL Queries folder.
+
+Run the SQL scripts in your MySQL Workbench to extract the necessary data.
+
+Power BI Visualizations:
+
+Open the Power BI files in Power BI Desktop to view the visualizations.
+
+Presentation:
+
+Open the PowerPoint file to view the presentation designed for top-level management.
+
