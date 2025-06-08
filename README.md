@@ -86,7 +86,9 @@ call distance_miles_category1;
 
 ## Tech Stack
 SQL (Joins, Group By, Window Functions, Subqueries, CASE, Stored Procedures)
+
 Power BI (Visualizations, Report Design)
+
 Git & GitHub (Version Control)
 
 ## Folder Structure
@@ -99,5 +101,7 @@ Git & GitHub (Version Control)
 
   ## Key Insights
 Identified top 5 customers contributing 70% of business-class revenue.
+
 Determined that Route ID 8 is the busiest, requiring increased aircraft capacity.
+
 Found that 60% of long-distance routes lack complimentary services for Economy Plus customers.
