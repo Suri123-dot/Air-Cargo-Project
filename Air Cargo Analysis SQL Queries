@@ -1,0 +1,152 @@
+create database air_cargo;
+use air_cargo;
+select * from customer;
+select * from passengers_on_flights;
+select * from routes;
+select * from ticket_details;
+
+Request 1:
+Write a query to display all the passengers (customers) who have travelled in routes 1 to 25.
+
+select customer.*, passengers_on_flights.route_id, passengers_on_flights.travel_date from customer
+join passengers_on_flights on customer.customer_id = passengers_on_flights.customer_id
+where passengers_on_flights.route_id between 01 and 25
+order by customer.customer_id;
+
+Request 2:
+Write a query to identify the number of passengers and total revenue in business class from the ticket_details table. 
+
+select count(distinct customer_id) as no_of_passengers, 
+sum(no_of_tickets*price_per_ticket) as total_revenue
+from ticket_details 
+where class_id = "Bussiness";
+
+Request 3:
+Write a query to display the full name of the customer by extracting the first name and last name from the customer table. 
+
+select concat(first_name, " ", last_name) as full_name from customer;
+
+Request 4:
+Write a query to extract the customers who have registered and booked a ticket. Use data from the customer and ticket_details tables. 
+
+select customer.first_name, customer.last_name, customer.customer_id
+from customer 
+join ticket_details on customer.customer_id = ticket_details.customer_id;
+
+Request 5:
+Write a query to identify the customer’s first name and last name based on their customer ID and brand (Emirates) from the ticket_details table. 
+
+select customer.first_name, customer.last_name, ticket_details.customer_id, ticket_details.brand
+from customer join ticket_details
+on customer.customer_id = ticket_details.customer_id
+where ticket_details.brand="Emirates";
+
+Request 6:
+Write a query to identify the customers who have travelled by Economy Plus class using Group By and Having clause on the passengers_on_flights table. 
+
+select distinct customer.*, passengers_on_flights.class_id
+from customer
+join passengers_on_flights 
+on customer.customer_id = passengers_on_flights.customer_id
+where passengers_on_flights.class_id = 'Economy plus';
+
+Request 7:
+Write a query to identify whether the revenue has crossed 450 using the IF clause on the ticket_details table.  
+
+select no_of_tickets, Price_per_ticket,
+if(sum(no_of_tickets * price_per_ticket) > 450, "Crossed 450", " Not crossed 450") as revenue_check 
+from ticket_details
+group by no_of_tickets, Price_per_ticket;
+
+Request 8:
+Write a query to find the maximum ticket price for each class using window functions on the ticket_details table. 
+
+SELECT distinct class_id, 
+MAX(price_per_ticket) OVER (PARTITION BY class_id) AS max_price
+FROM ticket_details
+order by max_price;
+
+Request 9:
+For the route ID 4, write a query to view the execution plan of the passengers_on_flights table. 
+
+select customer_id, aircraft_id, route_id, class_id from passengers_on_flights where route_id = 4;
+
+Request 10:
+14 Write a query to calculate the total price of all tickets booked by a customer across different aircraft IDs using rollup function.
+
+select aircraft_id, sum(no_of_tickets * price_per_ticket) as total_price 
+from ticket_details 
+group by aircraft_id with rollup;
+
+Request 11:
+15 Write a query to create a view with only business class customers along with the brand of airlines.
+
+create view business_class_customers as
+select distinct customer.customer_id, customer.gender, ticket_details.brand, ticket_details.aircraft_id,ticket_details.Price_per_ticket, ticket_details.class_id 
+from customer join ticket_details on customer.customer_id=ticket_details.customer_id
+where class_id="bussiness";
+
+select * from  business_class_customers;
+
+Request 12:
+Write a query to create a stored procedure that extracts all the details from the routes table where the travelled distance is more than 2000 miles. 
+
+USE `air_cargo`;
+DROP procedure IF EXISTS `check_distance`;
+
+DELIMITER $$
+USE `air_cargo`$$
+CREATE PROCEDURE `check_distance` ()
+BEGIN
+select * from routes where distance_miles > 2000;
+END$$
+
+DELIMITER ;
+
+call check_distance;
+
+Request 13:
+Write a query to create a stored procedure that groups the distance travelled by each flight into three categories. The categories are, short distance travel (SDT) for >=0 AND <= 2000 miles, intermediate distance travel (IDT) for >2000 
+AND <=6500, and long-distance travel (LDT) for >6500. 
+	
+USE `air_cargo`;
+DROP procedure IF EXISTS `distance_miles_category1`;
+
+DELIMITER $$
+USE `air_cargo`$$
+CREATE PROCEDURE `distance_miles_category1` ()
+BEGIN
+select flight_num, distance_miles,
+case
+when distance_miles between 0 and 2000 then "SDT"
+when distance_miles between 2000 and 6500 then "IDT"
+else "LDT"
+end as distance_category
+from routes;
+END$$
+
+DELIMITER ;
+
+call distance_miles_category1;
+
+Request 14:
+Write a query to extract ticket purchase date, customer ID, class ID and specify if the complimentary services are provided for the specific class using a stored function in stored procedure on the ticket_details table. 
+Condition: If the class is Business and Economy Plus, then complimentary services are given as Yes, else it is No. 
+
+USE `air_cargo`;
+DROP procedure IF EXISTS `check_Comp_service`;
+
+DELIMITER $$
+USE `air_cargo`$$
+CREATE PROCEDURE `check_Comp_service` ()
+BEGIN
+select p_date, customer_id, class_id,
+case
+when class_id in ("bussiness", "Economy") then "Yes"
+else "No"
+end as complimentary_service from ticket_details;
+END$$
+
+DELIMITER ;
+
+call check_Comp_service;
