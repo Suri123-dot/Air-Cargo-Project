@@ -85,7 +85,8 @@ DELIMITER ;
 call distance_miles_category1;
 
 ## Tech Stack
-
 SQL (MySQL)
-Git & GitHub
+
+GitHub
+
 DB Visualization (Power BI)
