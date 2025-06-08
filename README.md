@@ -37,47 +37,71 @@ As a DBA expert, need to focus on identifying the regular customers to provide o
 1. Write a SQL query to display all the passengers (customers) who have travelled in routes 1 to 25.
 
 select customer.*, passengers_on_flights.route_id, passengers_on_flights.travel_date from customer
+
 join passengers_on_flights on customer.customer_id = passengers_on_flights.customer_id
+
 where passengers_on_flights.route_id between 01 and 25
+
 order by customer.customer_id;
 
 2. Write a SQL query to identify the number of passengers and total revenue in business class from the ticket_details table. 
 
 select count(distinct customer_id) as no_of_passengers, 
+
 sum(no_of_tickets*price_per_ticket) as total_revenue
+
 from ticket_details 
+
 where class_id = "Bussiness";
 
 3.  Write a SQL query to identify whether the revenue has crossed 450 using the IF clause on the ticket_details table.
 
 select no_of_tickets, Price_per_ticket,
+
 if(sum(no_of_tickets * price_per_ticket) > 450, "Crossed 450", " Not crossed 450") as revenue_check 
+
 from ticket_details
+
 group by no_of_tickets, Price_per_ticket;
 
 4. Write a SQL query to find the maximum ticket price for each class using window functions on the ticket_details table.
 
 SELECT distinct class_id, 
+
 MAX(price_per_ticket) OVER (PARTITION BY class_id) AS max_price
+
 FROM ticket_details
+
 order by max_price;
 
 5. Write a SQL query to create a stored procedure that groups the distance travelled by each flight into three categories. The categories are, short distance travel (SDT) for >=0 AND <= 2000 miles, intermediate distance travel (IDT) for >2000 AND <=6500, and long-distance travel (LDT) for >6500. 
 
 USE `air_cargo`;
+
 DROP procedure IF EXISTS `distance_miles_category1`;
 
 DELIMITER $$
+
 USE `air_cargo`$$
+
 CREATE PROCEDURE `distance_miles_category1` ()
+
 BEGIN
+
 select flight_num, distance_miles,
+
 case
+
 when distance_miles between 0 and 2000 then "SDT"
+
 when distance_miles between 2000 and 6500 then "IDT"
+
 else "LDT"
+
 end as distance_category
+
 from routes;
+
 END$$
 
 DELIMITER ;
